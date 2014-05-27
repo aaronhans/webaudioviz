@@ -3,7 +3,7 @@ webaudioviz
 
 web audio, waveforms, webgl tutorial
 
-
+![alt tag](https://raw.github.com/aaronhans/webaudioviz/master/pattern.png)
 
 # Load Audio
 
