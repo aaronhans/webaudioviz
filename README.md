@@ -150,6 +150,6 @@ Add calls to init and animate to your volume load function to begin drawing line
 
 This should give you
 
-![alt tag](https://raw.github.com/aaronhans/webaudioviz/master/examples/images/pattern.png)
+![alt tag](https://raw.github.com/aaronhans/webaudioviz/master/examples/images/freq.png)
 
 

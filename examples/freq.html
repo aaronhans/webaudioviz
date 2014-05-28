@@ -6,56 +6,56 @@
 <body>
 <script>
 
-    var scene, camera, renderer, line;
-    var geometry, material, mesh, array;
+var scene, camera, renderer, line;
+var geometry, material, mesh, array;
 
-    function init() {
+function init() {
 
-        scene = new THREE.Scene();
+    scene = new THREE.Scene();
 
-        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-        camera.position.z = 1000;
+    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+    camera.position.z = 1000;
 
-        renderer = new THREE.WebGLRenderer();
-        renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth, window.innerHeight );
 
-        document.body.appendChild( renderer.domElement );
+    document.body.appendChild( renderer.domElement );
 
-    }
+}
 
-    function newLine() {
+function newLine() {
 
-    	scene.remove(line);
+	scene.remove(line);
 
-			var material = new THREE.LineBasicMaterial({
-				color: 0x0000ff
-			});
+	var material = new THREE.LineBasicMaterial({
+		color: 0x0000ff
+	});
 
-			var geometry = new THREE.Geometry();
+	var geometry = new THREE.Geometry();
 
-			array = new Uint8Array(analyser.frequencyBinCount);
-			analyser.getByteFrequencyData(array)
+	array = new Uint8Array(analyser.frequencyBinCount);
+	analyser.getByteFrequencyData(array)
 
-			var Ypoints = array;
-			var xPoint = -2048;
-			for(var i=0;i<Ypoints.length;i++) {
-				geometry.vertices.push( new THREE.Vector3( xPoint, Ypoints[i], 0 ) );
-				xPoint = xPoint + 4;
-			}
+	var Ypoints = array;
+	var xPoint = -2048;
+	for(var i=0;i<Ypoints.length;i++) {
+		geometry.vertices.push( new THREE.Vector3( xPoint, Ypoints[i], 0 ) );
+		xPoint = xPoint + 4;
+	}
 
-			line = new THREE.Line( geometry, material );
-			scene.add( line );
-    }
+	line = new THREE.Line( geometry, material );
+	scene.add( line );
+}
 
-    function animate() {
+function animate() {
 
-      // note: three.js includes requestAnimationFrame shim
-      requestAnimationFrame( animate );
-      newLine();
+  // note: three.js includes requestAnimationFrame shim
+  requestAnimationFrame( animate );
+  newLine();
 
-      renderer.render( scene, camera );
+  renderer.render( scene, camera );
 
-    }
+}
 
 
 // Fix up prefixing
