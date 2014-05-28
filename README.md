@@ -152,10 +152,13 @@ Add calls to init and animate to your volume load function to begin drawing line
   animate();
 ```
 
-This should give you an animated view of the signal strength over the full spectrum
+This should give you an animated view of the signal strength over the full spectrum seen in [freq.html](https://github.com/aaronhans/webaudioviz/blob/master/examples/freq.html)
 
 ![alt tag](https://raw.github.com/aaronhans/webaudioviz/master/examples/images/freq.png)
 
-We can hear between 20 and 20,000 Hz. The web audio api provides data over 44100 kHz sample size. You can define the fftSize which affects the number of slices of spectrum you receive in frequencyBinCount. I see a default fftSize of 1024 so it is slicing the spectrum into approximately 43Hz chunks. Here is a chart identifying the frequencies [corresponding to audible octaves](http://en.wikipedia.org/wiki/Audio_frequency)
+We can hear between 20 and 20,000 Hz. The web audio api provides data over 44100 Hz sample size. You can define the fftSize which affects the number of slices of spectrum you receive in frequencyBinCount. I see a default fftSize of 1024 so it is slicing the spectrum into approximately 43Hz chunks. Here is a chart identifying the frequencies [corresponding to audible octaves](http://en.wikipedia.org/wiki/Audio_frequency)
+
+
+
 
 

@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+	<script src="/three.js/three.min.js"></script>
+	<script src="js/orbitControls.js"></script>
+	<style type="text/css">
+	body { margin:0;padding:0; }
+	</style>
+</head>
+<body>
+	<!-- Custom shaders for particle effects -->
+<script type="x-shader/x-vertex" id="vertexshader">
+uniform float time;
+attribute float customFrequency;
+attribute vec3 customColor;
+varying vec3 vColor;
+
+void main() 
+{
+	vColor = customColor; // set color associated to vertex; use later in fragment shader
+	vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+
+	gl_PointSize = (1.0 + sin( customFrequency * time )) * 8.0 * ( 300.0 / length( mvPosition.xyz ) );
+  gl_Position = projectionMatrix * mvPosition;
+}
+</script>
+<script type="x-shader/x-fragment" id="fragmentshader">
+uniform sampler2D texture;
+varying vec3 vColor; // colors associated to vertices; assigned by vertex shader
+void main() 
+{
+	// calculates a color for the particle
+	gl_FragColor = vec4( vColor, 1.0 );
+	// sets particle texture to desired color
+	gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
+}
+</script>
+<!-- end of custom shaders -->
+
+<script>
+
+var container, scene, camera, renderer, controls;
+
+scene = new THREE.Scene();
+
+renderer = new THREE.WebGLRenderer( {antialias:true} );
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild( renderer.domElement );
+
+camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+camera.position.z = 100;
+scene.add(camera);
+
+controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+// create the particle variables
+var particleCount = 512,
+    particles = new THREE.Geometry();
+
+var width = window.innerWidth;
+var halfWidth = window.innerWidth / 2;
+var height = window.innerHeight;
+var halfHeight = window.innerHeight / 2;
+// now create the individual particles
+for(var p = 0; p < particleCount; p++) {
+	var pX = Math.random() * halfWidth - halfWidth / 2,
+		pY = Math.random() * halfHeight - halfHeight / 2,
+		pZ = Math.random() * 50 - 25,
+    particle = 
+			new THREE.Vector3(pX, pY, pZ);
+	// add it to the geometry
+	particles.vertices.push(particle);
+}
+
+var particleMaterial = new THREE.ParticleSystemMaterial({color: 0xff0000});
+
+//begin shaders
+var discTexture = THREE.ImageUtils.loadTexture( 'images/disc.png' );
+// values that are constant for all particles during a draw call
+this.customUniforms = 
+{
+	time:	 { type: "f", value: 1.0 },
+	texture: { type: "t", value: discTexture },
+};
+
+// properties that may vary from particle to particle. only accessible in vertex shaders!
+//	(can pass color info to fragment shader via vColor.)
+var customAttributes = 
+{
+	customColor:	 { type: "c", value: [] },
+	customFrequency: { type: 'f', value: [] },
+};
+
+// assign values to attributes, one for each vertex of the geometry
+for( var v = 0; v < particles.vertices.length; v++ ) 
+{
+	customAttributes.customColor.value[ v ] = new THREE.Color( 0xffffff * Math.random() );
+	customAttributes.customFrequency.value[ v ] = 5 * Math.random() + 0.5;
+}
+
+var shaderMaterial = new THREE.ShaderMaterial( 
+{
+	uniforms: 		customUniforms,
+	attributes:		customAttributes,
+	vertexShader:   document.getElementById( 'vertexshader' ).textContent,
+	fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
+	transparent: true, alphaTest: 0.5,  // if having transparency issues, try including: alphaTest: 0.5, 
+	// blending: THREE.AdditiveBlending, depthTest: false,
+});
+
+particleSet = new THREE.ParticleSystem( particles, shaderMaterial );	
+scene.add( particleSet );
+
+animate();
+
+function animate() 
+{
+  requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+	controls.update();
+}
+</script>
+	
+</body>
+</html>
+
+
