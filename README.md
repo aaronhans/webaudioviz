@@ -15,7 +15,7 @@ Launch Chrome with security disabled on Mac:
 open -a Google\ Chrome --args --disable-web-security
 ```
 
-This will allow you to just open an html file locally with the file open command and make ajax requests successfully. To do this on other OS see http://stackoverflow.com/questions/3102819/disable-same-origin-policy-in-chrome
+This will allow you to just open an html file locally with the file open command and make ajax requests successfully. To do this on other OS see [stack overflow disable web security](http://stackoverflow.com/questions/3102819/disable-same-origin-policy-in-chrome)
 
 ### Or run local server
 
@@ -37,6 +37,8 @@ Then you can browse everything in the examples directory at http://localhost:133
 
 # Load Audio
 
+This is a vanilla ajax request with responseType is set to arraybuffer and when data is received the global AudioContext 
+
 ```
 function loadSound(url, callback) {
   var request = new XMLHttpRequest();
@@ -57,6 +59,8 @@ function loadSound(url, callback) {
 ```
 
 # Play Audio
+
+Create a web audio analyser node and use this to process the audio signal which will give us access to frequency data described in the [MDN Analyser Node docs](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode)
 
 ```
 function playSound(buffer) {
@@ -148,8 +152,10 @@ Add calls to init and animate to your volume load function to begin drawing line
   animate();
 ```
 
-This should give you
+This should give you an animated view of the signal strength over the full spectrum
 
 ![alt tag](https://raw.github.com/aaronhans/webaudioviz/master/examples/images/freq.png)
+
+We can hear between 20 and 20,000 Hz. The web audio api provides data over 44100 kHz sample size. You can define the fftSize which affects the number of slices of spectrum you receive in frequencyBinCount. I see a default fftSize of 1024 so it is slicing the spectrum into approximately 43Hz chunks. Here is a chart identifying the frequencies [corresponding to audible octaves](http://en.wikipedia.org/wiki/Audio_frequency)
 
 

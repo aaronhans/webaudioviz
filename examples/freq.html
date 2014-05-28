@@ -49,10 +49,8 @@ function newLine() {
 
 function animate() {
 
-  // note: three.js includes requestAnimationFrame shim
   requestAnimationFrame( animate );
   newLine();
-
   renderer.render( scene, camera );
 
 }
