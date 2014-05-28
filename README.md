@@ -1,10 +1,11 @@
-webaudioviz
+web audio, waveforms, webgl tutorial
 ===========
 
-web audio, waveforms, webgl tutorial
+![alt tag](https://raw.github.com/aaronhans/webaudioviz/master/images/pattern.png)
 
-![alt tag](https://raw.github.com/aaronhans/webaudioviz/master/pattern.png)
+# Run local server
 
+In order to load the audio file into the webpage you need to run some kind of server locally to serve the static files or launch your browser with security disabled
 # Load Audio
 
 ```
