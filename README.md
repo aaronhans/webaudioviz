@@ -165,16 +165,16 @@ Audio file used is: [Paper Planes by Virtual riot](https://soundcloud.com/virtua
 
 Using a predefined geometry in three.js allows for quick particle placement. This example uses a particle sphere and also includes the mouse movement detection orbit controls three.js addon which allows you to move the camera around the page
 
+```
+var geometry = new THREE.SphereGeometry( 200, 22, 22 );
+var particleMaterial = new THREE.ParticleSystemMaterial({color: 0xff0000});
+```
+
 [sphere.html](https://github.com/aaronhans/webaudioviz/blob/master/examples/sphere.html)
 
 ![alt tag](https://raw.github.com/aaronhans/webaudioviz/master/examples/images/sphereinside.png)
 
 Using a predefined shape allows you to easily create, rotate or scale the entire geometry but will limit you if you want to rearrange that specific set of particles into a different shape. If that is what you are after start with a basic geometry and place the particles yourself: [particles.html](https://github.com/aaronhans/webaudioviz/blob/master/examples/particles.html)
-
-```
-var geometry = new THREE.SphereGeometry( 200, 22, 22 );
-var particleMaterial = new THREE.ParticleSystemMaterial({color: 0xff0000});
-```
 
 # Shaders
 
@@ -244,3 +244,9 @@ Apply the shader material to your geometry:
 ```
 particleSphere = new THREE.ParticleSystem( geometry, shaderMaterial );
 ```
+
+# Respond to music
+
+The picture at the top of this document is a screenshot of the final demo which is a few particle spheres with their color changing in response to any major sound file changes [gears.html](https://github.com/aaronhans/webaudioviz/blob/master/examples/gears.html)
+
+

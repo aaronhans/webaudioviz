@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<script src="/three.js/three.min.js"></script>
+	<script src="js/three.min.js"></script>
 	<script src="js/orbitControls.js"></script>
 	<style type="text/css">
 	body { margin:0;padding:0; }
@@ -104,8 +104,7 @@ var shaderMaterial = new THREE.ShaderMaterial(
 	attributes:		customAttributes,
 	vertexShader:   document.getElementById( 'vertexshader' ).textContent,
 	fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
-	transparent: true, alphaTest: 0.5,  // if having transparency issues, try including: alphaTest: 0.5, 
-	// blending: THREE.AdditiveBlending, depthTest: false,
+	transparent: true, alphaTest: 0.5
 });
 
 particleSet = new THREE.ParticleSystem( particles, shaderMaterial );	
