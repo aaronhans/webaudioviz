@@ -1,11 +1,40 @@
 web audio, waveforms, webgl tutorial
 ===========
 
-![alt tag](https://raw.github.com/aaronhans/webaudioviz/master/images/pattern.png)
+![alt tag](https://raw.github.com/aaronhans/webaudioviz/master/examples/images/pattern.png)
 
-# Run local server
+# Access files via ajax
 
 In order to load the audio file into the webpage you need to run some kind of server locally to serve the static files or launch your browser with security disabled
+
+### Launch browser with security disabled
+
+Launch Chrome with security disabled on Mac:
+
+```
+open -a Google\ Chrome --args --disable-web-security
+```
+
+This will allow you to just open an html file locally with the file open command and make ajax requests successfully. To do this on other OS see http://stackoverflow.com/questions/3102819/disable-same-origin-policy-in-chrome
+
+### Or run local server
+
+Install http://nodejs.org
+
+Checkout this repository, from the root directory run
+
+```
+npm install
+```
+
+Then launch the server with 
+
+```
+npm start
+```
+
+Then you can browse everything in the examples directory at http://localhost:1337/ like http://localhost:1337/images/pattern.png
+
 # Load Audio
 
 ```
@@ -118,3 +147,9 @@ Add calls to init and animate to your volume load function to begin drawing line
   init();
   animate();
 ```
+
+This should give you
+
+![alt tag](https://raw.github.com/aaronhans/webaudioviz/master/examples/images/pattern.png)
+
+

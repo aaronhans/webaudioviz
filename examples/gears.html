@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<script src="/three.js/three.min.js"></script>
+	<script src="js/three.min.js"></script>
 	<style type="text/css">
 	body { margin:0;padding:0; }
 	</style>
@@ -50,7 +50,7 @@ var geometry = new THREE.SphereGeometry( 200, 55, 55 );
 var particleMaterial = new THREE.ParticleSystemMaterial({color: 0xff0000});
 
 //begin shaders
-var discTexture = THREE.ImageUtils.loadTexture( 'disc.png' );
+var discTexture = THREE.ImageUtils.loadTexture( 'images/disc.png' );
 	// values that are constant for all particles during a draw call
 	this.customUniforms = 
 	{
@@ -186,7 +186,7 @@ function loadSound(url, callback) {
   }
 }
 
-loadSound('inyourface.mp3',function(buffer) {
+loadSound('audio/inyourface.mp3',function(buffer) {
   playSound(buffer);
   animate();
 });
