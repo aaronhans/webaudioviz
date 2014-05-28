@@ -244,3 +244,9 @@ Apply the shader material to your geometry:
 ```
 particleSphere = new THREE.ParticleSystem( geometry, shaderMaterial );
 ```
+
+# Respond to music
+
+The picture at the top of this document is a screenshot of the final demo which is a few particle spheres with their color changing in response to any major sound file changes [gears.html](https://github.com/aaronhans/webaudioviz/blob/master/examples/gears.html)
+
+
